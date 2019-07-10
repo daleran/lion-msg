@@ -18,7 +18,7 @@ public class Student {
     public String homePhone;
     public String homeAddr;
     public String localAddr;
-    public String emergenctContact;
+    public String emergencyContact;
     public int programID;
     public String paymentID;
     public int academicStatus;
