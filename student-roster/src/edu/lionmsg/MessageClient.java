@@ -1,5 +1,6 @@
 package edu.lionmsg;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -41,6 +42,12 @@ public class MessageClient {
 
     private byte[] serializeToJsonByteArray(Student student) {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsBytes(student);
+        try {
+            System.out.println(mapper.writeValueAsString(student));
+            return mapper.writeValueAsBytes(student);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
