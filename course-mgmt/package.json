@@ -1,0 +1,22 @@
+{
+  "name": "course-mgmt",
+  "version": "1.0.0",
+  "description": "A NodeJS RabbitMQ client for student data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daleran/lion-msg.git"
+  },
+  "author": "daleran@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daleran/lion-msg/issues"
+  },
+  "homepage": "https://github.com/daleran/lion-msg#readme",
+  "dependencies": {
+    "amqplib": "^0.5.3"
+  }
+}
