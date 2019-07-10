@@ -1,28 +1,34 @@
-const ampq = require('amqplib')
+var amqp = require('amqplib/callback_api')
 
-const initRabbitMQ = async () => {
-  try {
-    const connection = await ampq.connect('ampq://localhose')
-    const channel = await connection.createChannel()
-    const exchangeName = 'students'
-    const topic = 'student.new'
-
-    await channel.assertExchange(exchangeName, 'topic', { durable: false })
-    const queue = await channel.assertQueue('', { exclusive: true })
-
-    await channel.bindQueue(queue, exchangeName, topic)
-    const msgBytes = await channel.consume(queue, exchangeName, topic)
-
-    console.log(JSON.parse(msgBytes.content.toString()))
-
-    process.on('beforeExit', () => {
-      connection.close()
-      channel.close()
-    })
-  } catch (error) {
-    console.error(error)
-    process.exit()
+amqp.connect('amqp://localhost', function (error0, connection) {
+  if (error0) {
+    throw error0
   }
-}
+  connection.createChannel(function (error1, channel) {
+    if (error1) {
+      throw error1
+    }
+    var exchange = 'students'
 
-initRabbitMQ()
+    channel.assertExchange(exchange, 'topic', {
+      durable: false
+    })
+
+    channel.assertQueue('', {
+      exclusive: true
+    }, function (error2, q) {
+      if (error2) {
+        throw error2
+      }
+      console.log(' [*] Waiting for logs. To exit press CTRL+C')
+
+      channel.bindQueue(q.queue, exchange, 'student.new')
+
+      channel.consume(q.queue, function (msg) {
+        console.log(" [x] %s:'%s'", msg.fields.routingKey, msg.content.toString())
+      }, {
+        noAck: true
+      })
+    })
+  })
+})
