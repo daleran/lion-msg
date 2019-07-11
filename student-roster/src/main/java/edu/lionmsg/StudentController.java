@@ -44,7 +44,7 @@ public class StudentController {
         student.paymentID = "1111-206";
         student.academicStatus = 1;
 
-        System.out.println(student.name + " record sent from UI.");
+        System.out.println(student.name + " record received from UI.");
 
         return student;
     }

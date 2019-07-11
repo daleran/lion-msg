@@ -42,7 +42,7 @@ public class MessageClient {
 
             // Send the byte array to the students exchange with the topic student.new
             channel.basicPublish(EXCHANGE_NAME,NEW_STUDENT_TOPIC,null,studentBytes);
-            System.out.println(student.name + " record send to consumers.");
+            System.out.println(student.name + " record send to consumers at " + EXCHANGE_NAME + " topic " + NEW_STUDENT_TOPIC);
 
         } catch (Exception error) {
             System.out.println("Error notifying consumers about "+student.name);
