@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 /**
  * SWENG 568
  * RosterStudent.java
- * Purpose: Plain Old Data Object simulating an ORM returning an object from a database
+ * Purpose: Plain Old Data Object simulating a student record
  *
  * @author Sean Davis
  */

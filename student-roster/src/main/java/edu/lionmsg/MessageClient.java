@@ -6,6 +6,15 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
+/**
+ * SWENG 568
+ * MessageClient.java
+ * Purpose: A RabbitMQ message client capable of seraizling
+ * student objects and broadcasting them on the the
+ * student.new topic in the students exchange
+ *
+ * @author Sean Davis
+ */
 public class MessageClient {
     // Exchange and new student topic constants
     private final String EXCHANGE_NAME = "students";
@@ -40,10 +49,13 @@ public class MessageClient {
         }
     }
 
+    // Serialize the student object into a byte array of the JSON object
     private byte[] serializeToJsonByteArray(Student student) {
+        //Create a new Jackson Object Mapper
         ObjectMapper mapper = new ObjectMapper();
+
         try {
-            System.out.println(mapper.writeValueAsString(student));
+            //Serialize the student into the JSON byte array
             return mapper.writeValueAsBytes(student);
         } catch (JsonProcessingException e) {
             e.printStackTrace();

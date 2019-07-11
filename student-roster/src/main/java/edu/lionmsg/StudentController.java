@@ -3,20 +3,13 @@ package edu.lionmsg;
 /**
  * SWENG 568
  * StudentController.java
- * Purpose: A simple application which simulates the entry of new
+ * Purpose: A simulated controller for entry of new
  * students into the Student Roster System
  *
  * @author Sean Davis
  */
 public class StudentController {
-   //Encryption variables
-    private static String aesKey;
-    private static String initVector;
-
     public static void main(String[] args) {
-
-        //Parse the arguments to retrieve the student ID and security details
-        //parseArguments(args);
 
         //Simulate retrieving the student from a UI layer
         Student student = postNewStudent();
@@ -27,20 +20,6 @@ public class StudentController {
         //Create a new message client and send the student object
         MessageClient client = new MessageClient();
         client.notifyNewStudent(student);
-    }
-
-    public static void parseArguments(String[] args){
-        //Retrieve the AES key and initialization vector
-        if(args.length > 1) {
-            try {
-                aesKey = args[0];
-                initVector = args[1];
-            } catch (Exception err) {
-                System.out.println("Unable to parse arguments");
-            }
-        } else {
-            throw new IllegalArgumentException("All 2 arguments are required");
-        }
     }
 
     /**
@@ -70,12 +49,7 @@ public class StudentController {
         return student;
     }
 
-    /**
-     * Method for simulating new student data being
-     * entered into the system from an imaginary UI layer
-     *
-     * @return a new Student object
-     */
+    // Dummy method for adding the new student to the database
     private static void addStudentToDB(Student student) {
         System.out.println(student.name + " record added to OracleDB");
     }
