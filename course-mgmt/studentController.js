@@ -29,7 +29,8 @@ const listenForNewStudents = async () => {
     const channel = await client.connect('amqp://localhost')
     await client.listen(channel, 'students', 'student.new', handleMessage)
   } catch (error) {
-    console.error(error)
+    console.error('Error: Unable to set up client for new students.')
+    process.exit(1)
   }
 }
 

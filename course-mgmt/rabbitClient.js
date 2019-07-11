@@ -9,7 +9,10 @@ module.exports = class Rabbit {
           console.log(`Connected to RabbitMQ on ${hostname}`)
           resolve(channel)
         })
-        .catch((error) => { reject(error) })
+        .catch((error) => {
+          console.error(`Error: Unable to connect to ${hostname}`)
+          reject(error)
+        })
     })
   }
 
@@ -23,7 +26,10 @@ module.exports = class Rabbit {
           channel.consume(q.queue, handler, { noAck: true })
         })
         .then(() => { resolve() })
-        .catch((error) => { reject(error) })
+        .catch((error) => {
+          console.error(`Error: Unable to listen on ${exchange}`)
+          reject(error)
+        })
     })
   }
 }
