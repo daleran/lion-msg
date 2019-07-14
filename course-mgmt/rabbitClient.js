@@ -2,11 +2,11 @@
 module.exports = class Rabbit {
   // Connect to a specific host
   connect (hostname) {
-    // Wrap the ampq connection and channel creation in a promise
+    // Wrap the ampq connection and channel creation in a promise for reliable async
     return new Promise(function (resolve, reject) {
       // Connect to the RabbitMQ service at the specified hostname
       require('amqplib').connect(hostname)
-      // Then create a chanel
+      // Then create a channel
         .then((connection) => {
           return connection.createChannel()
         })
@@ -27,9 +27,9 @@ module.exports = class Rabbit {
   listen (channel, exchange, topic, callback) {
     // Wrap exchange and queue binding in a promise
     return new Promise(function (resolve, reject) {
-      // Assert a topic exchange exsists of the specified name
+      // Create or get a topic exchange exsists of the specified name
       channel.assertExchange(exchange, 'topic', { durable: false })
-      // Assert an anynomous queue exsists for the channnel
+      // Create or get an anynomous queue exsists for the channnel
       channel.assertQueue('', { exclusive: true })
       // Then bind the queue to the exchange and topic
         .then((q) => {

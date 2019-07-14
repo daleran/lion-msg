@@ -1,6 +1,6 @@
 const Client = require('./rabbitClient')
 
-// Conver a Roster System student object to a Course Managment student object
+// Convert a Roster System student object to a Course Managment student object
 const toCourseManagmentStudent = (student) => {
   console.log('Converting to a Course Mangement Student')
   let converted = { }
